@@ -21,9 +21,10 @@ module clock_divider
 );
   
   localparam integer DATA_W = (DIVISOR > 1) ? $clog2(DIVISOR) : 1;
+  localparam integer LAST_COUNT = DIVISOR - 1;
   reg [DATA_W-1:0] ncycles;
 
-  assign tick = !rst && (ncycles == DIVISOR - 1);
+  assign tick = !rst && (ncycles == LAST_COUNT[DATA_W-1:0]);
 
   always @(posedge clk or posedge rst) begin 
     if (rst) ncycles <= {DATA_W{1'b0}};
