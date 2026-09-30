@@ -11,6 +11,9 @@
 // -------------------------------------------------------------------------------------------------
 
 module counter_4bit
+#(
+  parameter integer CLK_HZ = 100_000_000
+)
 (
   input  wire       clk,
   input  wire       rst,
@@ -20,9 +23,12 @@ module counter_4bit
   wire tick; // Tap the output of the divisor
   reg [3:0] c_count; // So count can be updated in the procedural block.
 
-  clock_divider clk_div (
+  clock_divider
+  #(
+    .DIVISOR (CLK_HZ)
+  ) clk_div (
     .clk  (clk),
-    .rst  (rst)
+    .rst  (rst),
     .tick (tick)
   );
 
