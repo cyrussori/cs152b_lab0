@@ -6,7 +6,7 @@ module tb_counter_4bit;
   reg        rst;
   wire [3:0] count;
   
-  parameter integer CLK_HZ = 12;
+  parameter integer CLK_HZ = 2;
   integer edges;
 
   counter_4bit #(
@@ -32,7 +32,7 @@ module tb_counter_4bit;
   function [3:0] expected_value;
     input integer num_edge;
     begin 
-      expected_value = 4'(num_edge / CLK_HZ);
+      expected_value = num_edge / CLK_HZ;
     end
   endfunction
 
@@ -106,6 +106,8 @@ module tb_counter_4bit;
 
     increment(1);
     check_count(4'd0);
+
+    increment(CLK_HZ - 1);
 
     $display("PASS: reset, interval boundaries, and 4-bit rollover");
     $finish;
