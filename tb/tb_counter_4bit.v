@@ -79,6 +79,8 @@ module tb_counter_4bit;
   endtask
 
   initial begin 
+    $dumpfile("build/counter_4bit.vcd");
+    $dumpvars(0, tb_counter_4bit);
     init();
     #1;
 
