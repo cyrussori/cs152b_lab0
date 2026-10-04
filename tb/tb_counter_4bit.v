@@ -39,7 +39,7 @@ module tb_counter_4bit;
   task check_count;
     input [3:0] expected;
     begin 
-      if (expected != count) 
+      if (expected !== count) 
         $fatal(1, "FAIL at %0t: edges=%0d expected=%0d actual=%0d", $time, edges, expected, count);
     end
   endtask
@@ -57,6 +57,7 @@ module tb_counter_4bit;
       for (i = 0; i < num_cycles; i = i + 1) begin
         @(posedge clk);
         #2;
+        check_ref();
       end
     end
   endtask
